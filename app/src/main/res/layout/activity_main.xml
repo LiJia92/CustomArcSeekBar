@@ -6,12 +6,29 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <com.android.lovesixgod.customarcseekbar.CustomArcSeekBar
+    <!--<com.android.lovesixgod.customarcseekbar.CustomArcSeekBar-->
+    <!--android:id="@+id/seek_bar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:layout_marginTop="40dp"-->
+    <!--android:background="@color/colorAccent" />-->
+
+    <com.android.lovesixgod.customarcseekbar.seekbar.ArcSeekBarParent
         android:id="@+id/seek_bar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorAccent">
+
+        <com.android.lovesixgod.customarcseekbar.seekbar.SeekBarArcView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.android.lovesixgod.customarcseekbar.seekbar.SeekBarBallView
+            android:layout_width="20dp"
+            android:layout_height="100dp" />
+
+    </com.android.lovesixgod.customarcseekbar.seekbar.ArcSeekBarParent>
 
     <TextView
         android:id="@+id/seek_bar_progress"
