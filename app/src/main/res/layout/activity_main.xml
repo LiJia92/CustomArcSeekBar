@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <!--<com.android.lovesixgod.customarcseekbar.CustomArcSeekBar-->
-    <!--android:id="@+id/seek_bar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="100dp"-->
-    <!--android:layout_marginTop="40dp"-->
-    <!--android:background="@color/colorAccent" />-->
-
-    <com.android.lovesixgod.customarcseekbar.seekbar.ArcSeekBarParent
+    <com.android.lovesixgod.library.ArcSeekBarParent
         android:id="@+id/seek_bar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
-        android:background="@color/colorAccent">
-
-        <com.android.lovesixgod.customarcseekbar.seekbar.SeekBarArcView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <com.android.lovesixgod.customarcseekbar.seekbar.SeekBarBallView
-            android:layout_width="20dp"
-            android:layout_height="100dp" />
-
-    </com.android.lovesixgod.customarcseekbar.seekbar.ArcSeekBarParent>
+        android:background="@color/colorAccent"
+        app:arcColor="#000000"
+        app:arcWidth="3dp"
+        app:ballColor="#00ffff"
+        app:ballSize="30dp" />
 
     <TextView
         android:id="@+id/seek_bar_progress"

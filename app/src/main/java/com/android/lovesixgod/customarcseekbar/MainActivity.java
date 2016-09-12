@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.android.lovesixgod.customarcseekbar.seekbar.ArcSeekBarParent;
+import com.android.lovesixgod.library.ArcSeekBarParent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 //                textView.setText(String.valueOf(level));
 //            }
 //        });
+
         ArcSeekBarParent seekBar = (ArcSeekBarParent) findViewById(R.id.seek_bar);
         seekBar.setListener(new ArcSeekBarParent.OnProgressChangedListener() {
             @Override

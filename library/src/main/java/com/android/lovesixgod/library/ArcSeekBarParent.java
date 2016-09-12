@@ -1,9 +1,11 @@
-package com.android.lovesixgod.customarcseekbar.seekbar;
+package com.android.lovesixgod.library;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import java.math.BigDecimal;
@@ -14,21 +16,27 @@ import java.math.BigDecimal;
  */
 public class ArcSeekBarParent extends FrameLayout implements SeekBarBallView.OnSmoothScrollListener {
 
-    private PointF pointF1; // 起始点
-    private PointF pointF2; // 控制点
-    private PointF pointF3; // 终止点
-    private PointF circleCenter; // 球的坐标
+    private PointF pointF1;                     // 起始点
+    private PointF pointF2;                     // 控制点
+    private PointF pointF3;                     // 终止点
+    private PointF circleCenter;                // 球的坐标
     private int top;
     private int right;
     private int bottom;
     private int left;
-    private float currentX; // 当前x坐标，用于控制圆球位置
-    private final static float LEVEL = 6f; // 设置档次
-    private int currentLevel = 1; // 当前档次
+    private float currentX;                     // 当前x坐标，用于控制圆球位置
+    private final static float LEVEL = 6f;      // 设置档次
+    private int currentLevel = 1;               // 当前档次
 
-    private OnProgressChangedListener listener;
+    private OnProgressChangedListener listener; // 档次改变的监听
+    private Context context;
 
-    private SeekBarBallView ball;
+    private SeekBarBallView ball;               // 球
+    private SeekBarArcView arc;                 // 弧
+    private int ballSize;                       // 球的大小
+    private String ballColor;                   // 球的颜色
+    private int arcWidth;                       // 弧的宽度
+    private String arcColor;                    // 弧的颜色
 
     public ArcSeekBarParent(Context context) {
         super(context);
@@ -37,11 +45,13 @@ public class ArcSeekBarParent extends FrameLayout implements SeekBarBallView.OnS
 
     public ArcSeekBarParent(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
-    }
-
-    public ArcSeekBarParent(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        this.context = context;
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ArcSeekBarParent);
+        ballSize = array.getDimensionPixelSize(R.styleable.ArcSeekBarParent_ballSize, 90);
+        arcWidth = array.getDimensionPixelSize(R.styleable.ArcSeekBarParent_arcWidth, 10);
+        ballColor = array.getString(R.styleable.ArcSeekBarParent_ballColor);
+        arcColor = array.getString(R.styleable.ArcSeekBarParent_arcColor);
+        array.recycle();
         init();
     }
 
@@ -50,17 +60,26 @@ public class ArcSeekBarParent extends FrameLayout implements SeekBarBallView.OnS
         pointF2 = new PointF();
         pointF3 = new PointF();
         circleCenter = new PointF();
+
+        // 添加弧线View
+        if (arcColor == null) {
+            arcColor = "#000000";      // 当没有设置颜色时候，默认使用黑色
+        }
+        arc = new SeekBarArcView(context, arcColor, arcWidth);
+        arc.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(arc);
+
+        // 添加球View
+        if (ballColor == null) {
+            ballColor = "#FFFFFF";      // 当没有设置颜色时候，默认使用白色
+        }
+        ball = new SeekBarBallView(context, ballColor, ballSize);
+        ball.setListener(this);
+        addView(ball);
     }
 
     public void setListener(OnProgressChangedListener listener) {
         this.listener = listener;
-    }
-
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        ball = (SeekBarBallView) getChildAt(1);
-        ball.setListener(this);
     }
 
     @Override

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ArcSeekBarParent">
+        <attr name="ballColor" format="string" />
+        <attr name="ballSize" format="dimension" />
+        <attr name="arcWidth" format="dimension" />
+        <attr name="arcColor" format="string" />
+    </declare-styleable>
+
+</resources>
+

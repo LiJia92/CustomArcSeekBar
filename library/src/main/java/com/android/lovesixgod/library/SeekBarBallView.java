@@ -1,4 +1,4 @@
-package com.android.lovesixgod.customarcseekbar.seekbar;
+package com.android.lovesixgod.library;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,26 +16,30 @@ public class SeekBarBallView extends View {
 
     private Paint paint;
     private Scroller scroller;
+    private int ballSize;
+    private String ballColor;
     private OnSmoothScrollListener listener;
 
-    public SeekBarBallView(Context context) {
+    public SeekBarBallView(Context context, String ballColor, int ballSize) {
         super(context);
+        this.ballColor = ballColor;
+        this.ballSize = ballSize;
         init(context);
     }
 
     public SeekBarBallView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
-    }
-
-    public SeekBarBallView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        this.ballColor = "#FFFFFF";
+        this.ballSize = 10;
         init(context);
     }
 
     private void init(Context context) {
-        paint = new Paint();
         scroller = new Scroller(context);
+        paint = new Paint();
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.parseColor(ballColor));
+        paint.setStyle(Paint.Style.FILL);
     }
 
     public void setListener(OnSmoothScrollListener listener) {
@@ -44,7 +48,8 @@ public class SeekBarBallView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(widthMeasureSpec, widthMeasureSpec);
+        int spec = MeasureSpec.makeMeasureSpec(ballSize, MeasureSpec.EXACTLY);
+        setMeasuredDimension(spec, spec);
     }
 
     @Override
@@ -59,11 +64,6 @@ public class SeekBarBallView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        paint.reset();
-        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.WHITE);
-        paint.setStyle(Paint.Style.FILL);
         canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredWidth() / 2, getMeasuredWidth() / 2, paint);
     }
 
