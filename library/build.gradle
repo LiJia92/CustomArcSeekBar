@@ -89,7 +89,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "arcseekbar"	//发布到JCenter上的项目名字
+        name = "arcseekbar"	        //发布到JCenter上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
@@ -97,7 +97,7 @@ bintray {
     }
 }
 
-//这段代码一会给你们解释哈
+// 解决GBK乱码
 javadoc {
     options{
         encoding "UTF-8"
