@@ -41,4 +41,4 @@ seekBar.setListener(new ArcSeekBarParent.OnProgressChangedListener() {
 });
 ```
 
-[更多详细说明](http://lastwarmth.win/2016/04/28/new-seekbar/)
+[更多详细说明](http://lastwarmth.win/2016/04/27/seekbar/)
